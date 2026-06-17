@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Архетип диджея — минималистичный тест</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f8fafc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #0f172a;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        /* шапка — минималистичная */
+        .hero {
+            margin-bottom: 2.5rem;
+            text-align: left;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #3b82f6;
+            background: #eff6ff;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #334155;
+            border-left: 2px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 0.75rem 0;
+        }
+
+        .speaker {
+            font-size: 0.8rem;
+            color: #475569;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .speaker span {
+            background: #f1f5f9;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* основной блок вопросов */
+        .questions-panel {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            padding: 1.5rem 0 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0 1.5rem 1rem 1.5rem;
+            border-bottom: 1px solid #eef2f6;
+            font-weight: 600;
+        }
+
+        .counter {
+            background: #f1f5f9;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: #1e293b;
+        }
+
+        .block-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #3b82f6;
+            margin: 1.2rem 1.5rem 0.5rem 1.5rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid #3b82f6;
+        }
+
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 0 1rem;
+        }
+
+        .question-item {
+            background: #ffffff;
+            border: 1px solid #eef2f8;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .question-item:hover {
+            border-color: #cbd5e1;
+            background: #fefefe;
+        }
+
+        .q-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #0f172a;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 0.8rem;
+            align-items: baseline;
+        }
+
+        .q-number {
+            background: #f1f5f9;
+            width: 24px;
+            height: 24px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #1e293b;
+            flex-shrink: 0;
+        }
+
+        .options {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #334155;
+            background: #fafcff;
+            padding: 0.3rem 0.9rem;
+            border-radius: 2rem;
+            border: 0.5px solid #e2e8f0;
+            transition: 0.1s;
+        }
+
+        .radio-label input {
+            accent-color: #3b82f6;
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+
+        .radio-label:hover {
+            background: #f1f5f9;
+        }
+
+        /* кнопки */
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-family: inherit;
+            font-weight: 500;
+            padding: 0.6rem 1.4rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: #0f172a;
+            color: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-primary:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #334155;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        /* результат */
+        .result-card {
+            background: #ffffff;
+            border-radius: 1.5rem;
+            border: 1px solid #eef2f8;
+            padding: 1.8rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+        }
+
+        .result-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.25rem;
+            color: #0f172a;
+        }
+
+        .result-tag {
+            background: #f1f5f9;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 1.2rem;
+        }
+
+        .section {
+            margin-top: 1rem;
+            line-height: 1.45;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .section strong {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .advice-box {
+            background: #f8fafc;
+            border-left: 3px solid #3b82f6;
+            padding: 0.8rem 1rem;
+            border-radius: 0.8rem;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+        }
+
+        .reset-inline {
+            margin-top: 1.5rem;
+            border: 1px solid #cbd5e1;
+            background: white;
+            padding: 0.5rem 1.2rem;
+        }
+
+        .warning {
+            background: #fff8e7;
+            border-left: 3px solid #f59e0b;
+            padding: 0.7rem 1rem;
+            border-radius: 1rem;
+            margin: 0 1rem 1rem 1rem;
+            font-size: 0.85rem;
+            color: #92400e;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            border-top: 1px solid #eef2f6;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+            .question-item {
+                padding: 0.8rem;
+            }
+            .options {
+                gap: 0.8rem;
+            }
+            .btn {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="badge">ТЕХНИКИ ДИДЖЕННГА</div>
+        <h1>Тест на архетипы диджея</h1>
+        <div class="subhead">«Простой вспомогательный тест» — чтобы соцсети, стиль и ценности работали на тебя</div>
+        <div class="speaker">
+            <span>🎧 Серж Сёмин — рейвы с 2008</span>
+            <span>🏆 Со-основатель сети школ диджеинга</span>
+            <span>🌙 Экс-владелец клуба</span>
+        </div>
+        <div style="font-size: 0.75rem; margin-top: 0.8rem; color:#475569;">4 блока, 15 вопросов — узнай свой архетип</div>
+    </div>
+
+    <div class="questions-panel" id="quizPanel">
+        <div class="panel-header">
+            <span>Распакуй свой архетип</span>
+            <span class="counter" id="answerCounter">0/15</span>
+        </div>
+        <div id="questionsContainer"></div>
+        <div class="actions">
+            <button class="btn btn-primary" id="submitBtn">✨ Узнать архетип</button>
+            <button class="btn btn-secondary" id="resetBtn">⟳ Сбросить ответы</button>
+        </div>
+    </div>
+
+    <div id="resultArea" style="display: none;"></div>
+    <footer>© Открытые лекции — подписывайся, чтобы не пропускать разборы. Архетип прорастает из реальной жизни.</footer>
+</div>
+
+<script>
+    // ----- ВОПРОСЫ (15) -----
+    const QUESTIONS = [
+        "Ты готов играть трек, который нравится только тебе, даже если зал его не знает?",
+        "Ты считаешь, что трек должен быть идеально сведён и отмастерен, иначе ставить его стыдно?",
+        "Ты роешься в Bandcamp / SoundCloud / Telegram-каналах с редкими релизами чаще, чем слушаешь плейлисты VK Music?",
+        "Тебе важнее реакция зала (руки вверх, крики), чем точность сведения?",
+        "Тебя бесит, когда диджей ставит трек, который уже везде звучал?",
+        "Ты готов выступить перед тремя человеками, если это правильная тусовка и правильная музыка?",
+        "Ты считаешь, что в соцсетях главное — это атмосфера, визуал, полумрак, недосказанность, а не твоё лицо крупным планом?",
+        "Ты готов снимать себя за пультом с улыбкой, танцевать в кадре и шутить?",
+        "Ты считаешь, что диджей должен объяснять, что он делает (какой переход, какой трек, почему именно так)?",
+        "Твоя цель — играть в нишевых “подпольных” клубах, где собираются знатоки, а не на массовой аудитории?",
+        "Ты хочешь, чтобы тебя уважали коллеги-диджеи, даже если обычные слушатели тебя не знают?",
+        "Ты готов выступать где угодно (кальянка, день рождения, корпоратив, открытие кофейни), лишь бы народ танцевал?",
+        "Ты готов играть за опыт, знакомства, имя на афише, еду и пиво на правильной вечеринке?",
+        "Для тебя диджеинг — это в первую очередь способ заработать?",
+        "Ты готов инвестировать в оборудование, звук, обучение, даже если это не окупится в первый год?"
+    ];
+
+    // КЛЮЧИ АРХЕТИПОВ (PDF)
+    const visionMap = { 1: true, 2: null, 3: true, 4: null, 5: true, 6: true, 7: true, 8: false, 9: false, 10: true, 11: false, 12: false, 13: true, 14: false, 15: false };
+    const partyMap = { 1: false, 2: false, 3: false, 4: true, 5: false, 6: false, 7: false, 8: true, 9: false, 10: false, 11: false, 12: true, 13: false, 14: true, 15: false };
+    const techMap = { 1: true, 2: true, 3: true, 4: false, 5: true, 6: false, 7: false, 8: false, 9: true, 10: false, 11: true, 12: false, 13: false, 14: false, 15: true };
+
+    const ARCHETYPES = [
+        { id: "vision", name: "Визионер / Нишевый андерграунд", map: visionMap },
+        { id: "party", name: "Тусовщик / Король Вечеринок", map: partyMap },
+        { id: "tech", name: "Техничный мастер / Сноб-Коллекционер", map: techMap }
+    ];
+
+    const descPure = {
+        vision: {
+            portrait: "Ты играешь не для всех. Ты играешь для своих. Тебе плевать на коммерцию и массового зрителя. Твоя цель — правильный зал, правильный звук, правильная атмосфера. Ты готов быть непонятым 99%, чтобы 1% понял и запомнил.",
+            weakness: "Ты можешь стать высокомерным и закрытым. Никто не придет на твою вечеринку, если ты не научишься хотя бы немного привлекать внимание.",
+            slogan: "«Если ты понимаешь — ты свой. Если нет — иди слушай попу»."
+        },
+        party: {
+            portrait: "Тебе нужна реакция. Ты кайфуешь, когда зал кричит, руки вверх, толпа танцует. Тебе не стыдно поставить хит, если он работает. Ты умеешь разогреть любую аудиторию. Ты — про энергию, драйв и веселье.",
+            weakness: "Ты рискуешь стать «диджеем-шарманкой», которого зовут только потому, что он дешевый и согласен на любой формат. Без уникального вкуса ты быстро надоешь.",
+            slogan: "«Неважно, что играть. Важно, как танцуют»."
+        },
+        tech: {
+            portrait: "Ты — перфекционист. Ты не выпустишь микс, пока он не будет идеально сведён. Ты презираешь синхроплей и диджеев, которые не умеют работать руками. Твой главный актив — знание музыки и техники. Коллеги уважают тебя. Толпа иногда не понимает, в чём твоя гениальность, но тебе плевать.",
+            weakness: "Ты скучный в соцсетях. Ты показываешь процесс, но забываешь про эмоцию. Твои видео смотрят только такие же технари.",
+            slogan: "«Качество не требует компромиссов. Если ты не слышишь разницы — это не ко мне»."
+        }
+    };
+
+    const hybridData = {
+        "vision+tech": {
+            name: "Визионер + Техничный мастер (гибрид)",
+            portrait: "Ты играешь редкую музыку на высоком техническом уровне. Твоя аудитория — узкие ценители.",
+            advice: "Делай контент про процесс добычи редких треков. «Как я нашёл эту пластинку в 3 часа ночи на японском сайте». Сочетай атмосферу + экспертность.",
+            slogan: "Редкость и техника — твой язык",
+            weakness: "Риск остаться непонятым широкой публикой, но твои фанаты — настоящие ценители."
+        },
+        "party+tech": {
+            name: "Тусовщик + Техничный мастер (редкое сочетание)",
+            portrait: "Ты умеешь и раскачать зал, и технически чисто свести. Редкое сочетание.",
+            advice: "Делай контент, где ты учишь других диджеев, как раскачать зал без потери качества. Ты — идеальный наставник для новичков.",
+            slogan: "Мастерство + энергия = взрыв",
+            weakness: "Сложно сохранять баланс, иногда перекос в сторону ремесла или вечеринки."
+        },
+        "vision+party": {
+            name: "Визионер + Тусовщик (мост между подпольем и мейнстримом)",
+            portrait: "Ты хочешь играть редкую музыку, но и чтобы толпа танцевала. Самый сложный гибрид. Ты — проводник андеграунда в массы.",
+            advice: "Снимай контент «андерграунд, который залетел в массы». «Смотрите, этот трек никто не знал, но на моём сете все сошли с ума».",
+            slogan: "Редкое звучит для всех",
+            weakness: "Потеря идентичности, если не держать фокус на уникальности."
+        }
+    };
+
+    // БЛОКИ (музыка, публика, соцсети, карьера)
+    const BLOCKS = [
+        { title: "🎵 Блок 1. Про музыку", indices: [0, 1, 2, 4] },
+        { title: "👥 Блок 2. Про публику и аудиторию", indices: [3, 5, 9, 11, 12] },
+        { title: "📱 Блок 3. Про соцсети и контент", indices: [6, 7, 8] },
+        { title: "💎 Блок 4. Про карьеру и ценности", indices: [10, 13, 14] }
+    ];
+
+    let userAnswers = new Array(15).fill(null);
+
+    function renderQuestions() {
+        const container = document.getElementById('questionsContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        for (let block of BLOCKS) {
+            const blockTitle = document.createElement('div');
+            blockTitle.className = 'block-title';
+            blockTitle.innerText = block.title;
+            container.appendChild(blockTitle);
+            const listDiv = document.createElement('div');
+            listDiv.className = 'questions-list';
+            for (let idx of block.indices) {
+                const qNum = idx + 1;
+                const card = document.createElement('div');
+                card.className = 'question-item';
+                card.innerHTML = `
+                    <div class="q-text">
+                        <span class="q-number">${qNum}</span>
+                        <span>${QUESTIONS[idx]}</span>
+                    </div>
+                    <div class="options">
+                        <label class="radio-label">
+                            <input type="radio" name="q${qNum}" value="yes"> Да
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q${qNum}" value="no"> Нет
+                        </label>
+                    </div>
+                `;
+                listDiv.appendChild(card);
+            }
+            container.appendChild(listDiv);
+        }
+        // восстановить ответы
+        for (let i = 0; i < userAnswers.length; i++) {
+            if (userAnswers[i] !== null) {
+                const radios = document.querySelectorAll(`input[name="q${i+1}"]`);
+                const target = userAnswers[i] ? "yes" : "no";
+                radios.forEach(r => { if (r.value === target) r.checked = true; });
+            }
+        }
+        attachEvents();
+        updateCounterUI();
+    }
+
+    function attachEvents() {
+        for (let i = 0; i < QUESTIONS.length; i++) {
+            const radios = document.querySelectorAll(`input[name="q${i+1}"]`);
+            radios.forEach(radio => {
+                radio.removeEventListener('change', radio._listener);
+                const listener = (e) => {
+                    userAnswers[i] = (e.target.value === 'yes');
+                    updateCounterUI();
+                };
+                radio.addEventListener('change', listener);
+                radio._listener = listener;
+            });
+        }
+    }
+
+    function updateCounterUI() {
+        const answered = userAnswers.filter(a => a !== null).length;
+        const counterSpan = document.getElementById('answerCounter');
+        if (counterSpan) counterSpan.innerText = `${answered}/15`;
+    }
+
+    function gatherCurrent() {
+        for (let i = 0; i < QUESTIONS.length; i++) {
+            const radios = document.querySelectorAll(`input[name="q${i+1}"]`);
+            let selected = null;
+            for (let r of radios) if (r.checked) { selected = r.value === 'yes'; break; }
+            if (selected !== null) userAnswers[i] = selected;
+            else if (userAnswers[i] !== null) userAnswers[i] = null;
+        }
+        updateCounterUI();
+        return userAnswers;
+    }
+
+    function allAnsweredCheck() {
+        return userAnswers.every(a => a !== null);
+    }
+
+    function computeScores(answers) {
+        const scores = [];
+        for (let arch of ARCHETYPES) {
+            let matches = 0, relevant = 0;
+            for (let q = 1; q <= 15; q++) {
+                const expected = arch.map[q];
+                if (expected === null) continue;
+                relevant++;
+                if (answers[q-1] === expected) matches++;
+            }
+            const percent = relevant ? (matches / relevant) * 100 : 0;
+            scores.push({ id: arch.id, name: arch.name, percent });
+        }
+        return scores;
+    }
+
+    function getDominant(scores) {
+        const sorted = [...scores].sort((a,b) => b.percent - a.percent);
+        const first = sorted[0];
+        const second = sorted[1];
+        if (first.percent - second.percent <= 12 && first.percent >= 40 && second.percent >= 40) {
+            return { type: 'hybrid', primary: first.id, secondary: second.id, p1: first.percent, p2: second.percent };
+        }
+        return { type: 'pure', primary: first.id, percent: first.percent };
+    }
+
+    function getHybridKey(p, s) {
+        if ((p === 'vision' && s === 'tech') || (p === 'tech' && s === 'vision')) return "vision+tech";
+        if ((p === 'party' && s === 'tech') || (p === 'tech' && s === 'party')) return "party+tech";
+        if ((p === 'vision' && s === 'party') || (p === 'party' && s === 'vision')) return "vision+party";
+        return null;
+    }
+
+    function displayResult() {
+        gatherCurrent();
+        if (!allAnsweredCheck()) {
+            let warn = document.querySelector('.warning');
+            if (!warn) {
+                const panel = document.getElementById('quizPanel');
+                const w = document.createElement('div');
+                w.className = 'warning';
+                w.innerText = '⚠️ Ответьте на все 15 вопросов (Да / Нет), чтобы узнать архетип.';
+                panel.insertBefore(w, panel.firstChild);
+                setTimeout(() => w.remove(), 2800);
+            }
+            return;
+        }
+        const scores = computeScores(userAnswers);
+        const dominant = getDominant(scores);
+        const resultDiv = document.getElementById('resultArea');
+        let html = `<div class="result-card">`;
+
+        if (dominant.type === 'pure') {
+            const archId = dominant.primary;
+            let displayName = archId === 'vision' ? "🧩 Визионер / Нишевый андерграунд" : (archId === 'party' ? "🎧 Тусовщик / Король Вечеринок" : "⚙️ Техничный мастер / Сноб-Коллекционер");
+            const desc = descPure[archId];
+            html += `<div class="result-title">${displayName}</div>`;
+            html += `<div class="result-tag">совпадение ${Math.round(dominant.percent)}% · доминанта</div>`;
+            html += `<div class="section"><strong>🧬 Портрет:</strong> ${desc.portrait}</div>`;
+            html += `<div class="section"><strong>⚠️ Слабость:</strong> ${desc.weakness}</div>`;
+            html += `<div class="section"><strong>📢 Твой слоган:</strong> ${desc.slogan}</div>`;
+            if (archId === 'vision') html += `<div class="advice-box">✨ Контент-стратегия: полумрак, неон, философия звука. Привлекай «посвящённых» загадочными сторис.</div>`;
+            else if (archId === 'party') html += `<div class="advice-box">🔥 Чтобы не стать «шарманкой», добавляй редкие находки и работай над уникальным вкусом.</div>`;
+            else html += `<div class="advice-box">📀 Ты — эксперт. Добавь в соцсети живые эмоции, иногда улыбнись в кадре, чтобы расширить аудиторию.</div>`;
+        } else {
+            const hybridKey = getHybridKey(dominant.primary, dominant.secondary);
+            if (hybridKey && hybridData[hybridKey]) {
+                const h = hybridData[hybridKey];
+                html += `<div class="result-title">🌀 ${h.name}</div>`;
+                html += `<div class="result-tag">баланс: ${Math.round(dominant.p1)}% / ${Math.round(dominant.p2)}%</div>`;
+                html += `<div class="section"><strong>🎭 Суть:</strong> ${h.portrait}</div>`;
+                html += `<div class="section"><strong>⚠️ Особенность:</strong> ${h.weakness}</div>`;
+                html += `<div class="section"><strong>📢 Девиз:</strong> ${h.slogan}</div>`;
+                html += `<div class="advice-box">💫 ${h.advice}</div>`;
+            } else {
+                const fName = dominant.primary === 'vision' ? 'Визионер' : (dominant.primary === 'party' ? 'Тусовщик' : 'ТехМастер');
+                const sName = dominant.secondary === 'vision' ? 'Визионер' : (dominant.secondary === 'party' ? 'Тусовщик' : 'ТехМастер');
+                html += `<div class="result-title">🌀 Смешанный стиль: ${fName} + ${sName}</div>`;
+                html += `<div class="section">Ты сочетаешь черты двух архетипов. Это делает твой подход гибким.</div>`;
+                html += `<div class="advice-box">⭐ Совет: строй контент вокруг обеих сильных сторон.</div>`;
+            }
+        }
+        html += `<div class="section" style="margin-top:1rem; padding-top:0.5rem; border-top:1px solid #eef2f6;"><strong>📌 Важно:</strong> У тебя НЕТ чистого архетипа? Это нормально! Смешанные архетипы — самые распространённые.</div>`;
+        html += `<button class="btn btn-secondary reset-inline" id="inlineResetBtn">⟳ Пройти тест заново</button>`;
+        html += `</div>`;
+        resultDiv.innerHTML = html;
+        resultDiv.style.display = 'block';
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const inlineReset = document.getElementById('inlineResetBtn');
+        if (inlineReset) inlineReset.addEventListener('click', resetFull);
+    }
+
+    function resetFull() {
+        userAnswers.fill(null);
+        const allRadios = document.querySelectorAll('input[type="radio"]');
+        allRadios.forEach(r => r.checked = false);
+        updateCounterUI();
+        const resultDiv = document.getElementById('resultArea');
+        resultDiv.style.display = 'none';
+        resultDiv.innerHTML = '';
+        const warn = document.querySelector('.warning');
+        if (warn) warn.remove();
+        gatherCurrent();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderQuestions();
+        document.getElementById('submitBtn').addEventListener('click', displayResult);
+        document.getElementById('resetBtn').addEventListener('click', resetFull);
+    });
+</script>
+</body>
+</html>
